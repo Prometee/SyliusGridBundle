@@ -343,8 +343,8 @@ parameters:
 			path: src/Component/Configuration/GridConfigurationSortingHandler.php
 
 		-
-			message: '#^Cannot access offset mixed on mixed\.$#'
-			identifier: offsetAccess.nonOffsetAccessible
+			message: '#^Possibly invalid array key type mixed\.$#'
+			identifier: offsetAccess.invalidOffset
 			count: 2
 			path: src/Component/Configuration/GridConfigurationSortingHandler.php
 
