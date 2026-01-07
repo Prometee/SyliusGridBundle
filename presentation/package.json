@@ -1,0 +1,20 @@
+{
+  "name": "sylius-grid-bundle-presentation",
+  "version": "1.0.0",
+  "description": "Présentation Meetup - Utiliser des agents IA pour corriger les erreurs PHPStan",
+  "scripts": {
+    "clean": "rm -f slides.md slides.html slides.pdf slides.pptx",
+    "assemble": "cat slides/00-frontmatter.md > slides.md && for f in $(ls slides/[0-2][0-9]-*.md | sort); do [ \"$f\" != \"slides/00-frontmatter.md\" ] && echo '' >> slides.md && cat \"$f\" >> slides.md && echo '' >> slides.md && echo '---' >> slides.md; done && sed -i '' -e '$ { /^---$/d; }' slides.md",
+    "preview": "yarn assemble && marp --preview slides.md",
+    "build": "yarn assemble && marp slides.md -o slides.html",
+    "build:pdf": "yarn assemble && marp slides.md -o slides.pdf",
+    "build:pptx": "yarn assemble && marp slides.md -o slides.pptx",
+    "watch": "yarn assemble && marp --watch slides.md"
+  },
+  "devDependencies": {
+    "@marp-team/marp-cli": "^4.1.1"
+  },
+  "author": "Francis HILAIRE",
+  "license": "MIT"
+}
+
