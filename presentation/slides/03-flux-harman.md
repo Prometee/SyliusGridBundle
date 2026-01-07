@@ -1,15 +1,14 @@
 # 🎵 FLUX:: by HARMAN
 
-- Solutions audio professionnelles haut de gamme
-- Plugins audio, logiciels de spatialisation sonore
-- Utilisé dans les studios d'enregistrement et les salles de spectacle (live)
-- Stack technique : **Symfony**, **Sylius**, **API Platform**
+- Depuis 2007, création d'outils logiciels audio intuitifs et innovants
+- **Audio Immersif** (SPAT Revolution), **Analyse Audio** (MiRA), **Traitement Audio** (plugins)
+- Utilisés en création musicale, live, post-production, mastering et installations sonores
+- Stack technique du shop: **Symfony**, **Sylius**, **API Platform**
 
 ![bg opacity:0.25](https://www.flux.audio/wp-content/uploads/2019/05/Mac-SPAT-Freevox.png)
 
 <!--
-FLUX:: développe des solutions audio professionnelles haut de gamme : des plugins audio, des logiciels de spatialisation sonore utilisés dans les plus grands studios d'enregistrement et salles de spectacle du monde.
-
-Côté technique, notre stack web repose sur Symfony, Sylius pour la partie e-commerce, et API Platform. C'est dans ce contexte que j'ai été amené à contribuer activement à Sylius.
+FLUX:: : c'est des logiciels audio pro depuis 2007.
+Stack web de notre shop : Symfony + Sylius + API Platform.
 -->
 

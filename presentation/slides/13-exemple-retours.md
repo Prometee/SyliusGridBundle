@@ -8,11 +8,13 @@
 /**
  * NO PHPDOC
  */
+// Method has no return type specified.
 private function getCurrentlySortedBy(): array
 {
     return $this->parameters->has('sorting')
         ? array_merge(
             $this->definition->getSorting(),
+// Parameter #2 $arrays expects array, mixed given.
             $this->parameters->get('sorting'),
           )
         : $this->definition->getSorting()
@@ -47,10 +49,11 @@ private function getCurrentlySortedBy(): array
 <!--
 Deuxième exemple : les retours de méthodes non typés.
 
-Ici, on avait une méthode qui retournait un array sans préciser son contenu. PHPStan ne pouvait pas vérifier que les appelants utilisaient correctement le retour.
+Ici, on avait une méthode qui retournait un array sans préciser son contenu.
+PHPStan ne pouvait pas vérifier que les appelants utilisaient correctement le retour.
 
 L'IA a ajouté l'annotation @return avec le type précis, et a aussi refactoré le code pour le rendre plus lisible et mieux typé.
 
-Notez qu'elle a aussi ajouté un @var inline sur la variable intermédiaire pour que PHPStan puisse suivre le type à travers le array_merge.
+Notez qu'elle a aussi ajouté un @var inline sur la variable intermédiaire pour que PHPStan puisse suivre le type à travers l'`array_merge`.
 -->
 

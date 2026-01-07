@@ -17,6 +17,6 @@ Voici un exemple de résultat concret : un seul commit qui corrige 60 erreurs su
 
 16 fichiers modifiés, 84 lignes ajoutées, 252 supprimées. Le fait qu'on supprime plus qu'on ajoute montre qu'on a aussi simplifié du code en passant.
 
-Ce genre de commit aurait pris des heures à faire manuellement. Avec l'IA, c'était une question de minutes de collaboration.
+Ce genre de commit aurait pris des heures à faire manuellement. Avec l'IA, c'était une question de minutes.
 -->
 

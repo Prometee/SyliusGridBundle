@@ -30,6 +30,6 @@ Avant : 156 erreurs dans la baseline, du code legacy non typé, des PHPDoc incom
 
 Après : environ 10 erreurs restantes, des types explicites partout, des PHPDoc complets, et un seul outil d'analyse.
 
-Le code est maintenant beaucoup plus maintenable et les futurs contributeurs auront une meilleure expérience de développement.
+Le code est maintenant beaucoup plus maintenable et les futurs contributeurs auront une meilleure DX (expérience de développement).
 -->
 

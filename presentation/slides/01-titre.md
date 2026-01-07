@@ -10,8 +10,10 @@ Believe - 24 Rue Toulouse Lautrec, 75017 Paris
 <!--
 Bonsoir à tous et bienvenue à ce meetup PHP Paris !
 
-Ce soir, je vais vous partager mon retour d'expérience sur l'utilisation d'agents IA pour corriger des erreurs PHPStan dans un projet open source : SyliusGridBundle.
+Ce soir, je vais vous partager mon retour d'expérience sur l'utilisation d'agents IA pour corriger des erreurs PHPStan
+dans un projet open source : SyliusGridBundle.
 
-On va voir ensemble comment j'ai réussi à réduire drastiquement la dette technique d'un bundle Symfony en collaborant avec une IA.
+On va voir ensemble comment j'ai réussi à réduire drastiquement la dette technique d'un bundle Symfony en collaborant
+avec une IA.
 -->
 

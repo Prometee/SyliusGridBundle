@@ -153,9 +153,11 @@ Believe - 24 Rue Toulouse Lautrec, 75017 Paris
 <!--
 Bonsoir à tous et bienvenue à ce meetup PHP Paris !
 
-Ce soir, je vais vous partager mon retour d'expérience sur l'utilisation d'agents IA pour corriger des erreurs PHPStan dans un projet open source : SyliusGridBundle.
+Ce soir, je vais vous partager mon retour d'expérience sur l'utilisation d'agents IA pour corriger des erreurs PHPStan
+dans un projet open source : SyliusGridBundle.
 
-On va voir ensemble comment j'ai réussi à réduire drastiquement la dette technique d'un bundle Symfony en collaborant avec une IA.
+On va voir ensemble comment j'ai réussi à réduire drastiquement la dette technique d'un bundle Symfony en collaborant
+avec une IA.
 -->
 
 
@@ -175,9 +177,11 @@ On va voir ensemble comment j'ai réussi à réduire drastiquement la dette tech
 <!--
 Avant de commencer, laissez-moi me présenter rapidement.
 
-Je suis Francis HILAIRE, développeur web senior chez HARMAN International, plus précisément sur la marque FLUX:: qui développe des solutions audio professionnelles.
+Je suis Francis HILAIRE, développeur web senior chez HARMAN International, je m'occupe de toute l'IT de la marque FLUX::
+qui développe des solutions audio professionnelles.
 
-Je suis également contributeur open source dans l'écosystème PHP/Symfony, et notamment "Key contributor" sur Sylius, le framework e-commerce dont on va parler ce soir.
+Je suis également contributeur open source dans l'écosystème PHP/Symfony, et notamment "Sylius Key contributor", le
+framework e-commerce dont le bundle que nous allons voir ce soir est une partie intégrante.
 -->
 
 
@@ -185,17 +189,16 @@ Je suis également contributeur open source dans l'écosystème PHP/Symfony, et 
 
 # 🎵 FLUX:: by HARMAN
 
-- Solutions audio professionnelles haut de gamme
-- Plugins audio, logiciels de spatialisation sonore
-- Utilisé dans les studios d'enregistrement et les salles de spectacle (live)
-- Stack technique : **Symfony**, **Sylius**, **API Platform**
+- Depuis 2007, création d'outils logiciels audio intuitifs et innovants
+- **Audio Immersif** (SPAT Revolution), **Analyse Audio** (MiRA), **Traitement Audio** (plugins)
+- Utilisés en création musicale, live, post-production, mastering et installations sonores
+- Stack technique du shop: **Symfony**, **Sylius**, **API Platform**
 
 ![bg opacity:0.25](https://www.flux.audio/wp-content/uploads/2019/05/Mac-SPAT-Freevox.png)
 
 <!--
-FLUX:: développe des solutions audio professionnelles haut de gamme : des plugins audio, des logiciels de spatialisation sonore utilisés dans les plus grands studios d'enregistrement et salles de spectacle du monde.
-
-Côté technique, notre stack web repose sur Symfony, Sylius pour la partie e-commerce, et API Platform. C'est dans ce contexte que j'ai été amené à contribuer activement à Sylius.
+FLUX:: : c'est des logiciels audio pro depuis 2007.
+Stack web de notre shop : Symfony + Sylius + API Platform.
 -->
 
 
@@ -216,9 +219,9 @@ Côté technique, notre stack web repose sur Symfony, Sylius pour la partie e-co
 <!--
 Pour ceux qui ne connaissent pas, Sylius est un framework e-commerce PHP moderne, basé sur Symfony.
 
-Ce qui le distingue, c'est son architecture modulaire : chaque fonctionnalité est un bundle indépendant qu'on peut utiliser séparément. Il est API-first grâce à API Platform, et conçu pour les projets e-commerce sur mesure plutôt que pour du "out of the box".
-
-C'est un projet open source avec une communauté très active.
+Ce qui le distingue, c'est son architecture modulaire : chaque fonctionnalité est un bundle indépendant qu'on peut
+utiliser séparément. Il est API-first grâce à API Platform, et conçu pour les projets e-commerce sur mesure plutôt que
+pour du "out of the box".
 -->
 
 
@@ -246,11 +249,17 @@ final class BookGrid extends AbstractGrid
 ```
 
 <!--
-Le bundle sur lequel j'ai travaillé s'appelle SyliusGridBundle. C'est un composant qui permet de créer des vues de listing puissantes et configurables.
+Le bundle sur lequel j'ai travaillé s'appelle SyliusGridBundle. C'est un composant qui permet de créer des vues de
+listing configurables.
 
-Comme vous pouvez le voir dans cet exemple, on définit une grille avec des champs, des filtres et des actions. Le tout est déclaratif et très flexible.
+Comme vous pouvez le voir dans cet exemple, on définit une grille avec:
+- des champs
+- des filtres
+- et des actions
 
-C'est utilisé dans l'admin de Sylius pour afficher les listes de produits, commandes, clients, etc.
+Le tout est déclaratif et très flexible.
+
+C'est utilisé dans l'admin de Sylius pour afficher toutes les listes comme les produits, les commandes, les clients, etc.
 -->
 
 
@@ -282,9 +291,11 @@ C'est utilisé dans l'admin de Sylius pour afficher les listes de produits, comm
 </div>
 
 <!--
-Ce qui rend ce bundle puissant, c'est sa flexibilité au niveau des sources de données : Doctrine ORM, ODM, DQL, mais aussi des classes PHP simples, Elasticsearch, ou même des API externes.
+Ce qui rend ce bundle puissant, c'est sa flexibilité au niveau des sources de données : Doctrine ORM, ODM, DQL,
+mais aussi des classes PHP simples, Elasticsearch, ou même des API externes.
 
-Côté fonctionnalités, on a tout ce qu'il faut : colonnes configurables, filtres multiples, tri dynamique, pagination, et différents types d'actions.
+Côté fonctionnalités, on a tout ce qu'il faut : colonnes configurables, filtres multiples, tri dynamique, pagination,
+et différents types d'actions.
 
 C'est un bundle assez conséquent avec beaucoup de code... et donc beaucoup de dette technique potentielle.
 -->
@@ -307,11 +318,20 @@ C'est un bundle assez conséquent avec beaucoup de code... et donc beaucoup de d
 <!--
 Avant de parler du défi, laissez-moi expliquer rapidement ce qu'est PHPStan pour ceux qui ne connaissent pas.
 
-PHPStan est un outil d'analyse statique pour PHP. Il analyse votre code sans l'exécuter et détecte des bugs potentiels : mauvais types de paramètres, retours incorrects, appels de méthodes sur null, etc.
+PHPStan c'est un outil d'analyse statique pour PHP.
 
-Il fonctionne avec 11 niveaux de rigueur : le niveau 0 est très permissif, le niveau 10 est le plus strict.
+Il analyse votre code sans l'exécuter et détecte des bugs potentiels, par exemple :
+- mauvais types de paramètres
+- retours incorrects
+- détection de valeurs null
+- etc.
 
-Une fonctionnalité importante est la "baseline" : c'est un fichier qui liste les erreurs existantes qu'on choisit d'ignorer temporairement. C'est pratique quand on adopte PHPStan sur un projet legacy, mais ça peut devenir une dette technique si on n'y fait pas attention.
+Il fonctionne avec 11 niveaux de rigueur : le niveau 0 étant le plus permissif, le niveau 10 est le plus strict.
+
+Une fonctionnalité importante est la "baseline" : c'est un fichier qui liste les erreurs existantes qu'on choisit
+d'ignorer temporairement.
+C'est pratique quand on adopte PHPStan sur un projet legacy, mais ça peut devenir une dette technique si on n'y fait
+pas attention.
 -->
 
 
@@ -329,11 +349,13 @@ Une fonctionnalité importante est la "baseline" : c'est un fichier qui liste le
 ![bg opacity:0.25](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcGY2ZWIwZDhwc20wOGZtaGJ3N3U1eW9nZTJwdHZicXZhNzlpa3dsZSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/kspVl6FzbdblOMKRmM/giphy.gif)
 
 <!--
-Maintenant, parlons du défi concret.
+Maintenant, parlons du défi concrètement.
 
-SyliusGridBundle avait une baseline avec 156 erreurs ignorées. Ces erreurs s'accumulaient depuis longtemps et représentaient une vraie dette technique.
+SyliusGridBundle avait une baseline avec 156 erreurs ignorées.
+Ces erreurs s'accumulaient depuis longtemps et représentaient une vraie dette technique.
 
-Mon objectif : réduire drastiquement ce nombre. Mais corriger 156 erreurs manuellement, c'est fastidieux et chronophage. C'est là que l'IA entre en jeu.
+Mon objectif : réduire drastiquement ce nombre. Mais corriger 156 erreurs manuellement, c'est fastidieux et chronophage.
+C'est là que l'IA entre en jeu.
 -->
 
 ---
@@ -362,25 +384,19 @@ Et enfin, le processus est itératif : on peut corriger progressivement et véri
 
 ---
 
-# 🛠️ L'outil : Augment Code + Claude Sonnet 4.5
+# 🛠️ L'outil : Augment Code
 
 ## Agent IA intégré à l'IDE
 
-- 🔌 Extension PHPStorm / JetBrains
-- 🤖 Modèle : **Claude Sonnet 4.5** (Anthropic)
-- 📂 Accès complet à la codebase
-- 🔧 Peut modifier les fichiers directement
-- ✅ Exécute les commandes (PHPStan, tests)
-- 🔄 Processus itératif avec feedback
+- 🔌 Extension PHPStorm / JetBrains / VS Code
+- 🧠 **Moteur de contexte** : indexe et comprend toute la codebase
+- 🤖 Modèles : Claude, GPT-4, etc.
+- 🔧 Modifie les fichiers et exécute les commandes
+- ✅ Produit du code prêt pour la production
 
 <!--
-L'outil que j'ai utilisé s'appelle Augment Code. C'est une extension pour PHPStorm et les IDE JetBrains.
-
-Ce qui le différencie d'un simple chatbot, c'est que c'est un véritable agent : il a accès complet à la codebase, il peut modifier les fichiers directement, et surtout il peut exécuter des commandes comme PHPStan ou les tests.
-
-Le modèle utilisé est Claude Sonnet 4.5 d'Anthropic, qui est particulièrement bon pour comprendre et modifier du code.
-
-Le processus est vraiment itératif : l'IA propose, je valide ou ajuste, elle corrige, on relance PHPStan, et on recommence jusqu'à ce que ce soit bon.
+Augment Code : extension JetBrains avec Claude.
+Sa force : un moteur de contexte qui indexe et comprend toute la codebase pour produire du code prêt pour la production.
 -->
 
 
@@ -394,21 +410,33 @@ Le processus est vraiment itératif : l'IA propose, je valide ou ajuste, elle co
 2. **Fichiers Markdown** : Récapituler les tâches (mémoire limitée)
 3. **Proposition** : L'IA suggère des corrections
 4. **Revue** : Le développeur valide/ajuste
-5. **Commit** : Message détaillé
-6. **Vérification** : PHPStan + Tests
+5. **Vérification** : PHPStan + Tests
+6. **Itération** : Si erreur on itère
+7. **Commit** : Message détaillé
 
 <!--
-Voici le workflow que j'ai suivi. C'est vraiment une collaboration humain-IA.
+Voici le workflow que j'ai suivi.
 
-Point crucial : si vous ne savez pas ce que vous voulez faire, l'IA peut partir dans tous les sens et faire n'importe quoi. Par contre, si vous la guidez avec une tâche très précise, elle va s'y atteler et la faire correctement.
+Point crucial : si vous ne savez pas ce que vous voulez faire, l'IA peut partir dans tous les sens et faire
+n'importe quoi.
+Par contre, si vous la guidez avec une tâche très précise, elle va s'y atteler et la faire correctement.
 
-C'est pour ça que je procède par catégorie d'erreurs : d'abord l'IA analyse la baseline et identifie les erreurs PHPStan par type.
+C'est pour ça que je procède par catégorie d'erreurs : d'abord l'IA analyse la baseline et identifie les erreurs
+PHPStan par type.
 
-Autre point important : les IA ont une mémoire limitée. Je lui demande donc de créer des fichiers Markdown qui récapitulent les tâches à effectuer. Ça facilite les retours en arrière, et surtout, si l'agent plante ou ne répond plus, ça permet de garder un contexte sain pour reprendre le travail.
+Autre point important : les IA ont une mémoire limitée.
+Je lui demande donc de créer des fichiers Markdown qui récapitulent les tâches à effectuer.
+Ça facilite les retours en arrière, et surtout, si l'agent plante ou ne répond plus, ça permet de garder un contexte
+sain pour reprendre le travail.
 
 Ensuite, je lui demande de corriger un type précis. Elle propose des corrections, je revois chaque proposition, et on itère.
 
-Une fois validé, on commit avec un message détaillé. Et enfin, on vérifie que PHPStan passe et que les tests sont toujours verts.
+On vérifie que PHPStan passe et que les tests sont toujours verts.
+
+Itération : si erreur on itère
+
+Et enfin une fois validé, on commit avec un message détaillé. 
+
 -->
 
 
@@ -421,11 +449,24 @@ Une fois validé, on commit avec un message détaillé. Et enfin, on vérifie qu
 
 **Avant 😰**
 ```php
-// Erreur: mixed passé à une méthode typée
-$greaterThan = $this->getDataValue(
+/**
+ * PAS DE PHPDOC
+ */
+public function apply(
+    DataSourceInterface $dataSource,
+    string $name,
     $data,
-    'greaterThan',
-  );
+    array $options
+): void
+    
+    ...
+    
+// Parameter #1 $data of method
+// expects array, mixed given.
+    $greaterThan = $this->getDataValue(
+        $data,
+        'greaterThan',
+    );
 ```
 
 </div>
@@ -445,6 +486,8 @@ public function apply(
     
     ...
     
+    
+    
     $greaterThan = $this->getDataValue(
         $data,
         'greaterThan',
@@ -455,13 +498,12 @@ public function apply(
 </div>
 
 <!--
-Passons aux exemples concrets. Premier cas : les erreurs de type d'arguments.
+Premier cas : les erreurs de type d'arguments.
+Cette méthode est dans une classe finale qui implémente une interface.
+L'interface définit $data comme mixed, mais cette implémentation n'accepte que des array de string.
 
-Ici, on avait une variable $data de type mixed qui était passée à une méthode getDataValue attendant un array typé.
-
-La solution : ajouter une annotation @param sur la méthode pour préciser le type attendu de $data. Ainsi, PHPStan sait que $data est un array<string> et peut vérifier que l'appel à getDataValue est correct.
-
-C'est une technique classique mais fastidieuse à appliquer manuellement sur des dizaines de fichiers. L'IA a identifié et corrigé ce pattern partout dans le code.
+Il faut comprendre l'entièreté du contexte de la classe pour savoir si la correction via une PHPDoc est requise.
+On ajoute un @param pour préciser le type sans modifier la signature de l'interface ni le fonctionnement de la classe.
 -->
 
 
@@ -477,11 +519,13 @@ C'est une technique classique mais fastidieuse à appliquer manuellement sur des
 /**
  * NO PHPDOC
  */
+// Method has no return type specified.
 private function getCurrentlySortedBy(): array
 {
     return $this->parameters->has('sorting')
         ? array_merge(
             $this->definition->getSorting(),
+// Parameter #2 $arrays expects array, mixed given.
             $this->parameters->get('sorting'),
           )
         : $this->definition->getSorting()
@@ -516,11 +560,12 @@ private function getCurrentlySortedBy(): array
 <!--
 Deuxième exemple : les retours de méthodes non typés.
 
-Ici, on avait une méthode qui retournait un array sans préciser son contenu. PHPStan ne pouvait pas vérifier que les appelants utilisaient correctement le retour.
+Ici, on avait une méthode qui retournait un array sans préciser son contenu.
+PHPStan ne pouvait pas vérifier que les appelants utilisaient correctement le retour.
 
 L'IA a ajouté l'annotation @return avec le type précis, et a aussi refactoré le code pour le rendre plus lisible et mieux typé.
 
-Notez qu'elle a aussi ajouté un @var inline sur la variable intermédiaire pour que PHPStan puisse suivre le type à travers le array_merge.
+Notez qu'elle a aussi ajouté un @var inline sur la variable intermédiaire pour que PHPStan puisse suivre le type à travers l'`array_merge`.
 -->
 
 
@@ -533,7 +578,10 @@ Notez qu'elle a aussi ajouté un @var inline sur la variable intermédiaire pour
 
 **Avant 😰**
 ```php
-// FieldTypeInterface.php
+// Method has parameter $data
+// with no type specified.
+// Method has parameter $options
+// with no value type in array.
 public function render(
     Field $field,
     $data,
@@ -546,7 +594,6 @@ public function render(
 
 **Après ✅**
 ```php
-// FieldTypeInterface.php
 /**
  * @param array<string, mixed> $options
  */
@@ -563,13 +610,16 @@ public function render(
 L'IA a corrigé **toutes les implémentations** automatiquement.
 
 <!--
-Troisième exemple, et c'est là que l'IA brille vraiment : les interfaces.
+Troisième exemple : les interfaces.
 
-Quand on modifie une interface, il faut aussi modifier toutes ses implémentations. Ici, on a ajouté le type mixed explicite sur le paramètre $data et une annotation PHPDoc pour le paramètre $options.
+Quand on modifie une interface, il faut aussi modifier toutes ses implémentations.
+Ici, on a ajouté le type mixed explicite sur le paramètre $data et une annotation PHPDoc pour le paramètre $options.
 
-Petite parenthèse : l'ajout du mot-clé mixed sur le paramètre pourrait aussi être fait avec PHPStorm via Refactor > Change Signature, qui propage automatiquement le changement aux implémentations.
+Petite parenthèse ici : l'ajout du mot-clé mixed sur le paramètre pourrait aussi être fait avec PHPStorm via
+Refactor > Change Signature, qui propage automatiquement le changement aux implémentations.
 
-Mais pour l'annotation PHPDoc, l'IA a automatiquement trouvé et mis à jour toutes les classes qui implémentent cette interface. C'est exactement le genre de tâche répétitive où l'IA excelle et où un humain risque d'oublier un fichier.
+Mais pour l'annotation PHPDoc, l'IA a automatiquement trouvé et mis à jour toutes les classes qui implémentent cette interface.
+C'est exactement le genre de tâche répétitive où l'IA excelle et où un humain risque d'oublier un fichier.
 -->
 
 
@@ -594,7 +644,7 @@ Voici un exemple de résultat concret : un seul commit qui corrige 60 erreurs su
 
 16 fichiers modifiés, 84 lignes ajoutées, 252 supprimées. Le fait qu'on supprime plus qu'on ajoute montre qu'on a aussi simplifié du code en passant.
 
-Ce genre de commit aurait pris des heures à faire manuellement. Avec l'IA, c'était une question de minutes de collaboration.
+Ce genre de commit aurait pris des heures à faire manuellement. Avec l'IA, c'était une question de minutes.
 -->
 
 
@@ -618,7 +668,7 @@ Voici la progression globale du projet.
 
 On est partis de 156 erreurs. Après avoir corrigé les interfaces, on était à 106, soit 32% de réduction.
 
-Après les erreurs de type d'arguments, on est descendus à 31, soit 80% de réduction par rapport au départ.
+Après les erreurs de typage d'arguments, on est descendus à 31, soit 80% de réduction par rapport au départ.
 
 Et au final, on arrive à environ 10 erreurs restantes, soit une réduction de 94%.
 
@@ -665,11 +715,13 @@ Chaque catégorie a été traitée méthodiquement, une par une.
 <!--
 Au-delà des corrections, l'IA m'a aidé à appliquer systématiquement des bonnes pratiques.
 
-L'utilisation de @var inline avant les variables de type mixed, l'extraction de variables pour mieux les typer, l'utilisation de array<string, mixed> plutôt que simplement array...
+L'utilisation de @var inline avant les variables de type mixed, l'extraction de variables pour mieux les typer,
+l'utilisation de array<string, mixed> plutôt que simplement array.
 
 Et surtout, le type class-string<T> pour les noms de classes, qui permet à PHPStan de vérifier qu'on instancie bien le bon type.
 
-Une bonne pratique que j'ai adoptée : demander à l'IA de créer des fichiers Markdown pour récapituler les tâches. Les IA ont une mémoire limitée, et si votre agent plante ou ne répond plus, ces fichiers permettent de garder un contexte sain et de reprendre facilement.
+Une bonne pratique que j'ai adoptée : demander à l'IA de créer des fichiers Markdown pour récapituler les tâches.
+Les IA ont une mémoire limitée, et si votre agent plante ou ne répond plus, ces fichiers permettent de garder un contexte sain et de reprendre facilement.
 
 Mais attention : il faut toujours vérifier les suggestions de l'IA. Elle n'est pas infaillible.
 -->
@@ -692,7 +744,10 @@ Mais attention : il faut toujours vérifier les suggestions de l'IA. Elle n'est 
 <!--
 Parlons maintenant des limites. L'IA n'est pas parfaite, et il y a des précautions à prendre.
 
-Le point le plus important : si vous ne savez pas précisément ce que vous voulez, l'IA peut faire n'importe quoi. Elle a besoin d'instructions claires et d'une tâche bien définie. Par contre, quand vous la guidez sur une tâche précise, elle s'y attelle et la fait correctement.
+Le point le plus important : si vous ne savez pas précisément ce que vous voulez, l'IA peut faire n'importe quoi.
+Elle a besoin d'instructions claires et d'une tâche bien définie.
+Par contre, quand vous la guidez sur une tâche précise, elle s'y attelle et la fait correctement.
+Cela implique de savoir ce que l'on fait.
 
 La revue humaine reste obligatoire. On ne peut pas faire confiance aveuglément à l'IA.
 
@@ -700,7 +755,8 @@ Il faut lancer les tests après chaque modification pour s'assurer qu'on n'a rie
 
 Il faut comprendre pourquoi la correction fonctionne, pas juste l'accepter.
 
-Parfois, l'IA a besoin de plusieurs itérations pour trouver la bonne solution. Et parfois, elle propose des solutions trop complexes qu'il faut simplifier.
+Parfois, l'IA a besoin de plusieurs itérations pour trouver la bonne solution.
+Et parfois, elle propose des solutions trop complexes qu'il faut simplifier.
 -->
 
 
@@ -752,11 +808,15 @@ public function apply(
 <!--
 Voici une limite concrète que j'ai rencontrée.
 
-L'interface définit un type générique : array<string, mixed>. C'est correct pour l'interface car on ne sait pas à l'avance quelle sera la structure exacte.
+L'interface définit un type générique : array<string, mixed>.
+C'est correct pour l'interface, car on ne sait pas à l'avance quelle sera la structure exacte.
 
-Mais dans les classes finales, on connaît la structure précise du tableau. Par exemple, NumericRangeFilter attend un array avec les clés greaterThan et lessThan.
+Dans cette classe finale, on connaît la structure précise du tableau.
+Par exemple, NumericRangeFilter attend un array avec soit une clé greaterThan, soit une clé lessThan ou les deux,
+et à laquelle on passe un string qui est une valeur numérique à filtrer.
 
-L'IA n'a pas pu deviner ces array-shapes spécifiques. C'est un travail qui nécessite une connaissance métier que seul le développeur possède.
+L'IA n'a pas pu deviner ces array-shapes spécifiques.
+C'est un travail qui nécessite une connaissance métier ici l'IA ne sait pas que ce filtre dépend d'un FormType qui va valider la donnée.
 -->
 
 
@@ -782,9 +842,12 @@ Le gain de temps est significatif : ce qui aurait pris des heures se fait en min
 
 Mais il faut toujours valider les propositions. L'IA peut se tromper, surtout sur des cas marginaux.
 
-L'IA a besoin d'un contexte clair et d'une tâche précise. Si vous lui demandez vaguement "corrige les erreurs PHPStan", elle risque de faire n'importe quoi. Par contre, si vous lui dites "corrige les erreurs argument.type en ajoutant des annotations @param", elle va le faire méthodiquement et correctement.
+L'IA a besoin d'un contexte clair et d'une tâche précise. Si vous lui demandez vaguement "corrige les erreurs PHPStan", elle risque de faire n'importe quoi.
+Par contre, si vous lui dites "corrige les erreurs argument.type en ajoutant des annotations @param", elle va le faire méthodiquement et correctement.
 
-Et n'oubliez pas : les IA ont une mémoire limitée. Faites-leur créer des fichiers Markdown qui récapitulent les tâches. Ça facilite les retours en arrière, et si l'agent plante, vous gardez un contexte sain pour reprendre.
+Et n'oubliez pas : les IA ont une mémoire limitée.
+Faites-leur créer des fichiers Markdown qui récapitulent les tâches.
+Ça facilite les retours en arrière, et si l'agent plante, vous gardez un contexte sain pour reprendre.
 
 C'est vraiment la clé : plus vous êtes précis et organisé, meilleurs sont les résultats.
 -->
@@ -813,7 +876,7 @@ La suppression de Psalm qui faisait doublon avec PHPStan.
 
 Le refactoring du GridBuilder pour une API plus fluide.
 
-Et le support de Symfony 8 qui arrive bientôt.
+Et le support de Symfony 8.
 -->
 
 
@@ -832,11 +895,15 @@ Et le support de Symfony 8 qui arrive bientôt.
 <!--
 Pour ceux qui veulent reproduire cette approche, voici la stack d'outils que j'utilise.
 
-PHPStan comme outil d'analyse statique principal, avec les extensions phpstan-symfony et phpstan-doctrine pour une meilleure compréhension du framework.
+PHPStan comme outil d'analyse statique principal, avec les extensions:
+- phpstan-symfony
+- phpstan-doctrine
+pour une meilleure compréhension du framework.
 
 ECS (Easy Coding Standard) pour le formatage du code.
 
-Et Rector pour le refactoring automatisé. D'ailleurs, Rector et l'IA se complètent très bien : Rector pour les transformations mécaniques, l'IA pour les cas plus complexes.
+Et Rector pour le refactoring automatisé.
+D'ailleurs, Rector et l'IA se complètent très bien : Rector pour les transformations mécaniques, l'IA pour les cas plus complexes.
 -->
 
 
@@ -874,7 +941,7 @@ Avant : 156 erreurs dans la baseline, du code legacy non typé, des PHPDoc incom
 
 Après : environ 10 erreurs restantes, des types explicites partout, des PHPDoc complets, et un seul outil d'analyse.
 
-Le code est maintenant beaucoup plus maintenable et les futurs contributeurs auront une meilleure expérience de développement.
+Le code est maintenant beaucoup plus maintenable et les futurs contributeurs auront une meilleure DX (expérience de développement).
 -->
 
 
@@ -895,7 +962,8 @@ Pour conclure, parlons des perspectives futures.
 
 Notre productivité est déjà décuplée grâce à ces outils. Ce que je vous ai montré ce soir en est la preuve : des heures de travail réduites à quelques minutes.
 
-Les agents IA deviennent de plus en plus autonomes. On peut imaginer des intégrations CI/CD où l'IA corrige automatiquement certains types d'erreurs.
+Les agents IA deviennent de plus en plus autonomes.
+On peut imaginer des intégrations CI/CD où l'IA corrige automatiquement certains types d'erreurs.
 
 La génération de tests automatique est déjà possible et va s'améliorer.
 
@@ -919,7 +987,7 @@ On n'est qu'au début de cette révolution.
 ![bg right:30% 80%](https://media.giphy.com/media/l5RPZ6WjMv0k0/giphy.gif)
 
 <!--
-Voilà, c'est la fin de ma présentation. Je suis maintenant disponible pour répondre à vos questions.
+Voilà, je suis maintenant disponible pour répondre à vos questions.
 
 Vous trouverez ici les liens vers les ressources mentionnées : le repository GitHub de SyliusGridBundle, la documentation, Augment Code, et PHPStan.
 
@@ -935,7 +1003,7 @@ N'hésitez pas à me poser des questions sur l'utilisation de l'IA, PHPStan, ou 
 
 - 🐙 GitHub : **@Prometee**
 - 🏢 HARMAN International / **FLUX::**
-- 🛒 **Key contributor** Sylius
+- 🛒 **Sylius Key contributor**
 
 ![bg right:40% 80%](https://media.giphy.com/media/V1dH38rUl9yX7xU8nh/giphy.gif)
 

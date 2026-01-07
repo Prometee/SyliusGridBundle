@@ -19,6 +19,6 @@ La suppression de Psalm qui faisait doublon avec PHPStan.
 
 Le refactoring du GridBuilder pour une API plus fluide.
 
-Et le support de Symfony 8 qui arrive bientôt.
+Et le support de Symfony 8.
 -->
 

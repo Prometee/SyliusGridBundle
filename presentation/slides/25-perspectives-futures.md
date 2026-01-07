@@ -13,7 +13,8 @@ Pour conclure, parlons des perspectives futures.
 
 Notre productivité est déjà décuplée grâce à ces outils. Ce que je vous ai montré ce soir en est la preuve : des heures de travail réduites à quelques minutes.
 
-Les agents IA deviennent de plus en plus autonomes. On peut imaginer des intégrations CI/CD où l'IA corrige automatiquement certains types d'erreurs.
+Les agents IA deviennent de plus en plus autonomes.
+On peut imaginer des intégrations CI/CD où l'IA corrige automatiquement certains types d'erreurs.
 
 La génération de tests automatique est déjà possible et va s'améliorer.
 

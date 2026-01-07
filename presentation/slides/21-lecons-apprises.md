@@ -18,9 +18,12 @@ Le gain de temps est significatif : ce qui aurait pris des heures se fait en min
 
 Mais il faut toujours valider les propositions. L'IA peut se tromper, surtout sur des cas marginaux.
 
-L'IA a besoin d'un contexte clair et d'une tâche précise. Si vous lui demandez vaguement "corrige les erreurs PHPStan", elle risque de faire n'importe quoi. Par contre, si vous lui dites "corrige les erreurs argument.type en ajoutant des annotations @param", elle va le faire méthodiquement et correctement.
+L'IA a besoin d'un contexte clair et d'une tâche précise. Si vous lui demandez vaguement "corrige les erreurs PHPStan", elle risque de faire n'importe quoi.
+Par contre, si vous lui dites "corrige les erreurs argument.type en ajoutant des annotations @param", elle va le faire méthodiquement et correctement.
 
-Et n'oubliez pas : les IA ont une mémoire limitée. Faites-leur créer des fichiers Markdown qui récapitulent les tâches. Ça facilite les retours en arrière, et si l'agent plante, vous gardez un contexte sain pour reprendre.
+Et n'oubliez pas : les IA ont une mémoire limitée.
+Faites-leur créer des fichiers Markdown qui récapitulent les tâches.
+Ça facilite les retours en arrière, et si l'agent plante, vous gardez un contexte sain pour reprendre.
 
 C'est vraiment la clé : plus vous êtes précis et organisé, meilleurs sont les résultats.
 -->

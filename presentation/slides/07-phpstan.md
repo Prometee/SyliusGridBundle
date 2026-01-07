@@ -13,10 +13,19 @@
 <!--
 Avant de parler du défi, laissez-moi expliquer rapidement ce qu'est PHPStan pour ceux qui ne connaissent pas.
 
-PHPStan est un outil d'analyse statique pour PHP. Il analyse votre code sans l'exécuter et détecte des bugs potentiels : mauvais types de paramètres, retours incorrects, appels de méthodes sur null, etc.
+PHPStan c'est un outil d'analyse statique pour PHP.
 
-Il fonctionne avec 11 niveaux de rigueur : le niveau 0 est très permissif, le niveau 10 est le plus strict.
+Il analyse votre code sans l'exécuter et détecte des bugs potentiels, par exemple :
+- mauvais types de paramètres
+- retours incorrects
+- détection de valeurs null
+- etc.
 
-Une fonctionnalité importante est la "baseline" : c'est un fichier qui liste les erreurs existantes qu'on choisit d'ignorer temporairement. C'est pratique quand on adopte PHPStan sur un projet legacy, mais ça peut devenir une dette technique si on n'y fait pas attention.
+Il fonctionne avec 11 niveaux de rigueur : le niveau 0 étant le plus permissif, le niveau 10 est le plus strict.
+
+Une fonctionnalité importante est la "baseline" : c'est un fichier qui liste les erreurs existantes qu'on choisit
+d'ignorer temporairement.
+C'est pratique quand on adopte PHPStan sur un projet legacy, mais ça peut devenir une dette technique si on n'y fait
+pas attention.
 -->
 

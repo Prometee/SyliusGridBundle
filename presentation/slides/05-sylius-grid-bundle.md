@@ -20,10 +20,16 @@ final class BookGrid extends AbstractGrid
 ```
 
 <!--
-Le bundle sur lequel j'ai travaillé s'appelle SyliusGridBundle. C'est un composant qui permet de créer des vues de listing puissantes et configurables.
+Le bundle sur lequel j'ai travaillé s'appelle SyliusGridBundle. C'est un composant qui permet de créer des vues de
+listing configurables.
 
-Comme vous pouvez le voir dans cet exemple, on définit une grille avec des champs, des filtres et des actions. Le tout est déclaratif et très flexible.
+Comme vous pouvez le voir dans cet exemple, on définit une grille avec:
+- des champs
+- des filtres
+- et des actions
 
-C'est utilisé dans l'admin de Sylius pour afficher les listes de produits, commandes, clients, etc.
+Le tout est déclaratif et très flexible.
+
+C'est utilisé dans l'admin de Sylius pour afficher toutes les listes comme les produits, les commandes, les clients, etc.
 -->
 

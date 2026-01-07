@@ -4,7 +4,7 @@
 
 - 🐙 GitHub : **@Prometee**
 - 🏢 HARMAN International / **FLUX::**
-- 🛒 **Key contributor** Sylius
+- 🛒 **Sylius Key contributor**
 
 ![bg right:40% 80%](https://media.giphy.com/media/V1dH38rUl9yX7xU8nh/giphy.gif)
 
